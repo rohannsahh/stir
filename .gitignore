@@ -1,0 +1,77 @@
+# Byte-compiled / optimized / compiled Python files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+*.egg
+*.egg-info/
+dist/
+build/
+*.pyc
+*.pyo
+proxy.py
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Flask specific files
+instance/
+*.db
+*.sqlite3
+*.pyc
+
+# Environment variables
+.env
+.env.*
+
+# Selenium files
+geckodriver.log
+chromedriver.log
+selenium-screenshot*.png
+
+# Testing
+.coverage
+*.cover
+*.log
+nosetests.xml
+test-results.xml
+htmlcov/
+coverage/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Other ignored files
+*.bak
+*.tmp
+*.log
+*.lock

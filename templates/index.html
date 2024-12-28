@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trending Topics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .results {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .json-display {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Twitter Trending Topics</h1>
+        <button class="button" id="run-script-btn">Click here to run the script</button>
+        <div class="results" id="results"></div>
+    </div>
+    <script>
+        document.getElementById('run-script-btn').addEventListener('click', async () => {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = 'Running the script... Please wait.';
+            
+            try {
+                const response = await fetch('/run-script'); // Assumes Flask backend endpoint
+                const data = await response.json();
+
+                const { trend1, trend2, trend3, trend4, trend5, timestamp, ip_address, record } = data;
+                
+                resultsDiv.innerHTML = `
+                    <p>These are the most happening topics as on <b>${timestamp}</b>:</p>
+                    <ul>
+                        <li>${trend1 || 'N/A'}</li>
+                        <li>${trend2 || 'N/A'}</li>
+                        <li>${trend3 || 'N/A'}</li>
+                        <li>${trend4 || 'N/A'}</li>
+                        <li>${trend5 || 'N/A'}</li>
+                    </ul>
+                    <p>The IP address used for this query was <b>${ip_address}</b>.</p>
+                    <p>Here’s a JSON extract of this record from the MongoDB:</p>
+                    <div class="json-display">${JSON.stringify(record, null, 4)}</div>
+                    <button class="button" id="rerun-script-btn">Click here to run the query again</button>
+                `;
+
+                document.getElementById('rerun-script-btn').addEventListener('click', () => {
+                    document.getElementById('run-script-btn').click();
+                });
+
+            } catch (error) {
+                resultsDiv.innerHTML = `<p>Error running the script: ${error.message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
