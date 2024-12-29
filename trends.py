@@ -55,14 +55,14 @@ def fetch_trending_topics():
     driver.implicitly_wait(10)
     
     
-
-    # email_field = WebDriverWait(driver, 20).until(
+    # try:
+    #     email_field = WebDriverWait(driver, 20).until(
     #             EC.presence_of_element_located((By.NAME, "email"))
     #         )
-    # if email_field:      
+    #        
     #     email_field.send_keys(EMAIL)
     #     email_field.send_keys(Keys.RETURN)
-    # else:
+    # except NoSuchElementException:
     #     pass
     
     
@@ -76,7 +76,7 @@ def fetch_trending_topics():
     driver.implicitly_wait(20)
 
     # LOGIC for extracting trends
-    
+
     # Locate "What’s Happening" section and fetch trending topics
 
     # for every div element with css selectordata-testid='trend' in div 'aria-label' with value 'Timeline: Trending now' 

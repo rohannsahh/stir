@@ -32,7 +32,7 @@ instance/
 
 # Environment variables
 .env
-.env.*
+
 
 # Selenium files
 geckodriver.log

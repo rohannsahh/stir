@@ -4,8 +4,8 @@
   
 # steps to run project locally  
 1. ```bash  
-        git clone https://github.com/rohannsahh/stir.git  
-        cd stir  
+      git clone https://github.com/rohannsahh/stir.git  
+      cd stir  
   
 2.  Prerequisites-  
     Python,  Chrome, ChromeDriver, MongoDB(local or atlas), pip  
@@ -32,8 +32,7 @@
 7. use this command to access webpage in browser  
    using flask at http://127.0.0.1:5000/  
    ```bash  
-      python app.py  
-
+      python app.py   
 
 # About me   
 My name is Rohan kumar . I am final year Btech IT undergrad at Bhartividyapeeth college of engineering. This is my submission for sde intern task .It scrapes the top 5 trending topics from twitter's home web page ,properly login's , scrapes and save the data in mongodb database. It is built exactly as mentioned in the task uses selenium for scraping , proxymesh for rotating ip address and mongodb as database.    
@@ -52,4 +51,5 @@ Others: WebRTC, socket.io, AWS, Docker, ML algorithms
   
 Availability - Immediately available to join from 1jan /onsite/hybrid/remote  
 rohannsahh@gmail.com  
+  
   
