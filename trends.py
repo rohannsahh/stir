@@ -23,21 +23,35 @@ EMAIL = os.getenv("EMAIL")
 PROXY = os.getenv("PROXY")
 MONGO_URI = os.getenv("MONGO_URI")
 
+proxy_auth_plugin_path = "proxy_auth_plugin.zip"
 
 chrome_options = Options()
-chrome_options.add_argument(f"--proxy-server={PROXY}")
+chrome_options.add_extension(proxy_auth_plugin_path)
+
+# chrome_options.add_argument(f"--proxy-server={PROXY}")
 
 service = Service("C:\\Users\\ROHAN\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe")
 
 # public IP address
+
+
 def get_public_ip():
     try:
-        response = requests.get('https://api.ipify.org?format=json')
+        # Make the request to ipify API to get the public IP
+        response = requests.get('https://api.ipify.org?format=json', proxies={
+            'http': f'{PROXY}',
+            'https': f'{PROXY}'
+        })
+        
         ip_address = response.json().get('ip')
+        
+        # Print and return the IP address
+        print(f"Current Public IP: {ip_address}")
         return ip_address
     except requests.exceptions.RequestException as e:
         print(f"Error fetching IP: {e}")
         return None
+
 
 def fetch_trending_topics():
     driver = webdriver.Chrome()

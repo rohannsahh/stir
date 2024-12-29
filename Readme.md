@@ -1,5 +1,6 @@
 ## Assignment completion for Stir internship  
-  
+   project demonstartion video: https://drive.google.com/file/d/1WEm1aJntFoTnCyJ0HxsOJaJuM8poATur/view?usp=sharing    
+       
 # Task to scrape twitter trends from twitter home page using selenium and proxymesh  
   
 # steps to run project locally  
@@ -9,7 +10,10 @@
   
 2.  Prerequisites-  
     Python,  Chrome, ChromeDriver, MongoDB(local or atlas), pip  
-  
+    Configure proxymesh account and update proxy in edit proxies section from dashboard  
+    ```bash   
+       python proxy.py  # it creates zip file for chrome extension for setting up proxy in selenium   
+        
 3. create a virtual environment  
    ```bash  
       python -m venv venv  
@@ -48,7 +52,7 @@ Front-End: React, Redux, Next.js
 Back-End: Node.js, Express.js, Prisma, Django, flask    
 Databases: MongoDB, PostgreSQL, MySQL, Redis    
 Others: WebRTC, socket.io, AWS, Docker, ML algorithms      
-  
+Resume: https://drive.google.com/file/d/1C8wU22R9C7Ib9gLkQNle-B-uSb06gmKf/view?usp=sharing
 Availability - Immediately available to join from 1jan /onsite/hybrid/remote  
 rohannsahh@gmail.com  
   

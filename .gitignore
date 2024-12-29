@@ -19,7 +19,7 @@ dist/
 build/
 *.pyc
 *.pyo
-proxy.py
+test.py
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
@@ -32,7 +32,7 @@ instance/
 
 # Environment variables
 .env
-
+proxy_auth_plugin.zip
 
 # Selenium files
 geckodriver.log
