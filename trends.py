@@ -1,4 +1,4 @@
-import random
+import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -12,17 +12,24 @@ from bson import ObjectId
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import requests
+from dotenv import load_dotenv
 
 
-# Configure ProxyMesh and Selenium
+load_dotenv()
 
-PROXY = "http://rohan11:rohan11@us-ca.proxymesh.com:31280"
+USERNAME = os.getenv("TWITTER_USERNAME")
+PASSWORD = os.getenv("TWITTER_PASSWORD")
+EMAIL = os.getenv("EMAIL")
+PROXY = os.getenv("PROXY")
+MONGO_URI = os.getenv("MONGO_URI")
+
 
 chrome_options = Options()
 chrome_options.add_argument(f"--proxy-server={PROXY}")
 
 service = Service("C:\\Users\\ROHAN\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe")
 
+# public IP address
 def get_public_ip():
     try:
         response = requests.get('https://api.ipify.org?format=json')
@@ -41,56 +48,71 @@ def fetch_trending_topics():
     username_field = WebDriverWait(driver, 20).until(
              EC.presence_of_element_located((By.NAME, "text"))
          )
-    username_field.send_keys("rohann134")
+    username_field.send_keys(USERNAME)
     username_field.send_keys(Keys.RETURN)
 
-    # Add a delay for loading login steps, if needed
+    #  delay for loading login steps
     driver.implicitly_wait(10)
+    
+    
 
+    # email_field = WebDriverWait(driver, 20).until(
+    #             EC.presence_of_element_located((By.NAME, "email"))
+    #         )
+    # if email_field:      
+    #     email_field.send_keys(EMAIL)
+    #     email_field.send_keys(Keys.RETURN)
+    # else:
+    #     pass
+    
+    
     password_field = WebDriverWait(driver, 20).until(
              EC.presence_of_element_located((By.NAME, "password"))
         )
-    password_field.send_keys("Rohan@1102")
+    password_field.send_keys(PASSWORD)
     password_field.send_keys(Keys.RETURN)
 
     # Wait for homepage to load
     driver.implicitly_wait(20)
 
-# Locate "What’s Happening" section and fetch trending topics
-    #  for every div element with css selectordata-testid='trend' in div 'aria-label' with value 'Timeline: Trending now' 
-    #  trending_section = driver.find_element(By.CSS_SELECTOR, "[data-testid='trend']")
-    #  for every div in div with css selector with data-testid ='trend' we have to target div with <div dir="ltr" class="css-146c3p1 r-bcqeeo r-1ttztb7 r-qvutc0 r-37j5jr r-a023e6 r-rjixqe r-b88u0q r-1bymd8e" style="text-overflow: unset; color: rgb(231, 233, 234);"><span class="r-18u37iz"><span dir="ltr" class="css-1jxf684 r-bcqeeo r-1ttztb7 r-qvutc0 r-poiln3" style="text-overflow: unset;">#PriyankaChopra</span></span></div> this div 
-    #  and we have to extract the text from the span inside each div
+    # LOGIC for extracting trends
+    
+    # Locate "What’s Happening" section and fetch trending topics
+
+    # for every div element with css selectordata-testid='trend' in div 'aria-label' with value 'Timeline: Trending now' 
+
+    # for every div in div with css selector with data-testid ='trend' we have to target div with like
+
+    # example- <div dir="ltr" class="css-146c3p1 r-bcqeeo r-1ttztb7 r-qvutc0 r-37j5jr r-a023e6 r-rjixqe r-b88u0q r-1bymd8e" style="text-overflow: unset; color: rgb(231, 233, 234);">
+    # <span class="r-18u37iz"><span dir="ltr" class="css-1jxf684 r-bcqeeo r-1ttztb7 r-qvutc0 r-poiln3" style="text-overflow: unset;">#PriyankaChopra</span></span></div>  
+
+    #  and we have to extract the text from the span inside this each div
+
     trending_section = WebDriverWait( driver, 50).until( 
            EC.presence_of_element_located((By.XPATH, "//div[contains(@aria-label, 'Timeline: Trending now')]"))
         )
 
-    # Find all elements with the specific CSS selector for trends
+    # this specific CSS selector div
     trend_divs = trending_section.find_elements(By.CSS_SELECTOR, "[data-testid='trend']")
 
     # Extract the trending topics text
     topics = []
-    for trend in trend_divs[:5]:  # Limit to the first 5 topics
+    for trend in trend_divs[:5]:  # first 5 topics
         try:
             span_element = trend.find_element(By.XPATH, ".//div[2]/span")
             topics.append(span_element.text)
         except NoSuchElementException:
           topics = []
 
-    print("Trending Topics:", topics)
+ 
 
 
-
-
-    # Fetch IP address used (simulated here)
-    # ip_address = PROXY.split("@")[1].split(":")[0]
-
-    # Unique ID and timestamp
-    # unique_id = str(uuid.uuid4())
+    #  timestamp
+  
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    # Store data in MongoDB
-    client = MongoClient("mongodb+srv://admin:admin123@cluster0.nbjwb.mongodb.net/stir?retryWrites=true&w=majority&appName=Cluster0")
+    # Storing data in MongoDB
+    client = MongoClient(MONGO_URI)
     db = client["twitter_trends"]
     collection = db["trending"]
 
@@ -116,4 +138,4 @@ if __name__ == "__main__":
     result = fetch_trending_topics()
     print(json.dumps(result, indent=4))
 
-    # print(json.dumps(result,ensure_ascii=False, indent=4))
+ 

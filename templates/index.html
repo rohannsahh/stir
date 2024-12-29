@@ -50,14 +50,16 @@
             resultsDiv.innerHTML = 'Running the script... Please wait.';
             
             try {
-                const response = await fetch('/run-script'); // Assumes Flask backend endpoint
+                const response = await fetch('/run-script'); 
                 const data = await response.json();
+                const { trend1, trend2, trend3, trend4, trend5, timestamp, ip_address } = data;
+               
 
-                const { trend1, trend2, trend3, trend4, trend5, timestamp, ip_address, record } = data;
-                
+
                 resultsDiv.innerHTML = `
                     <p>These are the most happening topics as on <b>${timestamp}</b>:</p>
                     <ul>
+
                         <li>${trend1 || 'N/A'}</li>
                         <li>${trend2 || 'N/A'}</li>
                         <li>${trend3 || 'N/A'}</li>
@@ -66,10 +68,10 @@
                     </ul>
                     <p>The IP address used for this query was <b>${ip_address}</b>.</p>
                     <p>Here’s a JSON extract of this record from the MongoDB:</p>
-                    <div class="json-display">${JSON.stringify(record, null, 4)}</div>
+                    <div class="json-display">${JSON.stringify(data)}</div>
                     <button class="button" id="rerun-script-btn">Click here to run the query again</button>
                 `;
-
+                 
                 document.getElementById('rerun-script-btn').addEventListener('click', () => {
                     document.getElementById('run-script-btn').click();
                 });

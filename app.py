@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from trends import fetch_trending_topics  # Import your script
+from trends import fetch_trending_topics 
 
 app = Flask(__name__)
 
@@ -14,9 +14,12 @@ def index():
 def run_script():
     try:
         result = fetch_trending_topics()
+        print(result)
         return jsonify(result)
+    
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 if __name__ == "__main__":
     app.run(debug=True)
