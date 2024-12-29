@@ -36,7 +36,14 @@
 7. use this command to access webpage in browser  
    using flask at http://127.0.0.1:5000/  
    ```bash  
-      python app.py   
+      python app.py      
+
+         
+![Screenshot (622)](https://github.com/user-attachments/assets/75203700-e79c-4c99-9abb-2411c0f50b11)  
+![Screenshot (619)](https://github.com/user-attachments/assets/59114161-daf0-4f14-8ed9-55b54da543e9)  
+![Screenshot (620)](https://github.com/user-attachments/assets/dd6b8ce0-7cb9-44ec-bd51-b799e4f0174e)  
+![Screenshot (621)](https://github.com/user-attachments/assets/091f53c5-511e-4aa6-92ce-fa50262ad04a)  
+
 
 # About me   
 My name is Rohan kumar . I am final year Btech IT undergrad at Bhartividyapeeth college of engineering. This is my submission for sde intern task .It scrapes the top 5 trending topics from twitter's home web page ,properly login's , scrapes and save the data in mongodb database. It is built exactly as mentioned in the task uses selenium for scraping , proxymesh for rotating ip address and mongodb as database.    
